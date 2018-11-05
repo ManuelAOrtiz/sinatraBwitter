@@ -1,0 +1,59 @@
+<h2 style="text-align: center">Individual Blog: </h2>
+<div id="entryWrapper">
+	
+<div id="blogWrapper">
+<div id="blogTitle"><%= @blog.title %></div>
+<% blogUser = User.where(id: @blog.user_id).first %>
+<div id="blogUser">By: <%= blogUser.username %></div>
+<div id="blogContent"><%= @blog.content %></div>
+</div>
+
+<div id="commentWrapper">
+	<% comments = Comment.where(blog_id: @blog.id)%>
+	<% if comments.length != 0 %>
+		<div style="font-weight: bold">Comments: </div>
+			<% comments.each do |c|%>
+				<% user = User.where(id: c.user_id).first %>
+				<div> <span style="font-weight: bold"><%= user.username %>:</span> <%= c.content %> </div>
+			<% end %>
+	<% else %>
+	<% end %>
+
+<% if session[:user_id] == nil%>
+
+<% else %>
+<h2 class="commentTitle" style="text-align: center;">Comment on the blog</h2>
+
+		<form  id="blogCommentForm"
+		style="display: grid; grid-template-rows: 1fr 1fr;" method="post" action="/addComment">
+			<input type="text" name="comment" placeholder="You can enter comment here" style="margin:0 auto;grid-row: 1/2; width: 90%;">
+			<input type="hidden" name="blogid" value="<%= @blog.id %>">
+			<input type="hidden" name="userid" value="<%= session[:user_id]%>">
+			<input type="submit" style="margin:0 auto;grid-row: 2/3; width: 35%;" value="Send Comment">
+		</form>
+<%end%>
+</div>
+</div>
+
+<% if session[:user_id] == @blog.user_id  %>
+<div id="updateBlog">
+	
+	<h2 class="blogHeader">Update a blog</h2>
+
+	<form method="post" action="/update/<%= @blog.id %>">
+		<p>Update your blog here: </p>
+		<p>Title</p>
+		<input type="text" name="title" value="<%= @blog.title %>">
+		<p>Content</p>
+		<textarea type="text" name="content"><%= @blog.content %></textarea>
+		<br>
+		<input type="submit" value="Update">
+	</form>
+	<form method="post" action="/destroy">
+		<input type="hidden" name="blogId" value="<%= @blog.id %>">
+		<input id="deleteBlog" type="submit" value="Delete">
+	</form>
+</div>
+
+<% end %>
+

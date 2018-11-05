@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet"> 
+</head>
+<body>
+<div id="nav-container"> 
+			
+				<ul id="navbar">
+					<li><a href="/">HOME</a></li>
+					<% if session[:user_id] != nil%>
+					<li><a href="/users/<%=session[:user_id]%>">YOUR BLOGS</a></li>
+					<li><a href="/account/<%=session[:user_id]%>">YOUR ACCOUNT</a></li>
+					<% end %>
+				</ul>
+		
+
+		
+			<% if session[:user_id] == nil%>
+			<div class="login" style="grid-template-columns: 2fr 1fr">
+				<form method="post" action="/login">
+				<h6>Log in</h6>
+					<input type="text" name="username" placeholder="Username">
+					<input type="text" name="password" placeholder="Password">
+					<input type="submit">
+					<a href="/createUser" id="newUser">New User</a>
+				</form>
+			</div>
+			<% else %>
+
+			<% @currentUser = User.where(id: session[:user_id]).first%>
+
+			<div class="login" style="grid-template-rows: .5fr 1fr">
+			<h3> Welcome <%= @currentUser.username%></h3>
+				<form method="post" action="/logout">
+					<input type="submit" value="Log out">
+				</form>
+
+			</div>
+				<div id="createBlog">
+					<form method="post" id="blogForm" action="/create_blog">
+						<input type="text" name="userTitle" placeholder="Title">
+						<textarea type="text" name="userContent" placeholder="Content"></textarea>
+						<input type="submit">
+					</form>
+				</div>
+
+			<% end %>
+		
+		
+
+</div>
+
+<div>
+
+	<%= yield %>
+</div>
+</body>
+</html>

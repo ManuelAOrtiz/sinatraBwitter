@@ -1,0 +1,36 @@
+<h1 id="accountTitle"> Your account info </h1>
+
+<div id="accountInfo">
+	<h2><span id="bold">Username:</span> <%= @user.username %></h2>
+	<h2><span id="bold">Name:</span> <%= @user.fname %> <%= @user.lname %></h2>
+	<h2><span id="bold">Email:</span> <%= @user.email %></h2>
+</div>
+
+<form method="post" action="/updateUser">
+	<div id="updateForm" >
+		<div id="updateItem">
+			<p>Username:</p> <input id="updateUsername" type="text" name="username" value="<%= @user.username %>">
+		</div>
+		<div id="updateItem">
+			<p>Password:</p> <input id="updatePassword" type="text" name="password" value="<%= @user.password %>">
+		</div>
+
+
+		<div id="updateItem">
+			<p>First Name:</p> <input id="updateFname" type="text" name="fname" value="<%= @user.fname %>">
+		</div>
+		<div id="updateItem">
+			<p>Last Name:</p> <input id="updateLname" type="text" name="lname" value="<%= @user.lname %>">
+		</div>
+		<div id="updateItem">
+			<p>Email:</p> <input id="updateEmail" type="text" name="email" value="<%= @user.email %>">
+		</div>
+		
+			<input type="submit" id="updateSubmit" value="Update Account">
+			<input type="hidden" name="updateId" value="<%= @user.id %>">
+	</div>
+</form>
+
+<form style="text-align: center;" method="post" action="/destroyUser">
+	<button style="margin-top: 1%;">Delete User</button>
+</form>

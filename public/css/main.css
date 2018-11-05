@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  font-family: 'Lato', sans-serif; }
+
+#blogForm {
+  display: grid;
+  grid-template-rows: .2fr 1fr .2fr;
+  width: 50%;
+  margin: 0 auto; }
+
+#nav-container {
+  display: grid;
+  grid-template-columns: .6fr 2fr 1fr;
+  margin-bottom: 2%;
+  background-color: #ffedcc;
+  padding: 1%; }
+
+.login {
+  grid-column: 3/4;
+  grid-row: 1/2;
+  display: grid; }
+
+#createBlog {
+  grid-column: 2/3;
+  grid-row: 1/2; }
+
+#navbar {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  list-style: none;
+  font-size: 1.4em;
+  margin: 2%;
+  width: 100%; }
+
+#navbar li a:hover {
+  font-weight: bold; }
+
+#navWrapper {
+  grid-row: 1/2; }
+
+#navbar li {
+  text-align: center; }
+
+#navbar li a {
+  text-decoration: none;
+  color: #001a33; }
+
+#newUser {
+  text-decoration: none; }
+
+#newUser:hover {
+  font-weight: bold; }
+
+#entryWrapper {
+  width: 80%;
+  margin: 0 auto;
+  padding: .1% .1%; }
+
+#blogWrapper {
+  display: grid;
+  grid-template-rows: .6fr 1.2fr 1fr;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #ffedcc;
+  border: 1px solid #ccdeff;
+  border-radius: 5px;
+  padding: 1% 1%; }
+
+#commentWrapper {
+  width: 50%;
+  margin: 0 auto;
+  background-color: #ccdeff;
+  border-radius: 0 0 5px 5px;
+  padding: 1% 1%; }
+
+#blogTitle {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #001a33; }
+
+#blogTitle a {
+  color: #001a33; }
+
+#blogTitle a:hover {
+  font-style: italic; }
+
+#blogUser {
+  color: #000d1a; }
+
+#blogContent {
+  margin: 0 auto;
+  font-size: 1.2em;
+  width: 100%;
+  color: #000d1a; }
+
+#commentTitle {
+  font-weight: bold; }
+
+#italic {
+  font-style: italic; }
+
+#tabIn {
+  width: 85%;
+  margin: 0 auto;
+  margin-bottom: 2%; }
+
+#blogCommentForm {
+  width: 70%;
+  margin: 0 auto; }
+
+#updateBlog {
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+  background-color: #ffedcc;
+  margin-top: 1%;
+  padding: 2% 0; }
+
+#bold {
+  font-weight: bold; }
+
+#accountInfo {
+  text-align: center; }
+
+#accountTitle {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto; }
+
+#createUserForm {
+  text-align: center;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 40%;
+  margin: 2% auto;
+  grid-row-gap: 5%; }
+
+#createUserSubmit {
+  width: 30%; }
+
+#updateForm {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  width: 60%;
+  margin: 0 auto;
+  grid-row-gap: 1%; }
+
+#updateSubmit {
+  width: 20%;
+  margin: 0 auto; }
+
+#updateItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 50%;
+  margin: 0 auto; }
+
+#updateItem p {
+  text-align: right; }
+
+#userLink {
+  text-decoration: none;
+  color: black; }
+
+#userLink:hover {
+  font-style: italic; }
+
+/*# sourceMappingURL=main.css.map */

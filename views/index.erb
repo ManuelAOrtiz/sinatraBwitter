@@ -1,0 +1,33 @@
+<h3 id="tabIn">List of all blogs: </h3>
+
+
+
+	<% @blogs.each do |e|%>
+	<div id="entryWrapper">
+	<div id="blogWrapper">
+	<div id="blogTitle"><a href="/blog/<%= e.id%>"><%= e.title%></a></div>
+	<% blogUser = User.where(id: e.user_id).first %>
+	<div id="blogUser"><a id="userLink" href="/users/<%= blogUser.id%>">By: <%= blogUser.username %></a></div>
+	<div id="blogContent"><%= e.content%></div>			
+	</div>
+	<% comments = Comment.where(blog_id: e.id)%>
+	<div id="commentWrapper">
+			<% if comments.length != 0 %>
+			<div id="commentTitle">Comments: </div>
+				<% comments.each do |c|%>	
+					<% user = User.where(id: c.user_id).first %>
+					<div id="commentContent"> <%= user.username %>: <span id="italic"><%= c.content %> </span> </div>
+
+				<% end %>
+				<% if session[:user_id] != nil %>
+					<div><form method="post" action="/addComment">
+					<input type="text" name="comment" placeholder="You can enter comment here">
+					<input type="hidden" name="blogid" value="<%=e.id %>">
+					<input type="hidden" name="userid" value="<%= session[:user_id]%>">
+					<input type="submit" value="Send Comment">
+					</form></div>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<% end %>

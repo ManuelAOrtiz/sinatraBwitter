@@ -1,0 +1,89 @@
+<%if session[:user_id] != @webid %>
+
+
+<% post = Blog.where(user_id: @webid) %>
+
+	<% if post.length == 0 %>
+		<% if session[:user_id] == 0%>
+		<% end %>
+
+		<h2 style="text-align: center;"> This user has no blogs. </h2>
+
+	<% else %>
+		<% post.each do |e| %>
+		<div id="entryWrapper">
+			<div id="blogWrapper">
+			<div id="blogTitle"><a href="/blog/<%= e.id%>"><%= e.title%></a></div>
+			<% blogUser = User.where(id: e.user_id).first %>
+			<div id="blogUser">By: <%= blogUser.username %></div>
+			<div id="blogContent"><%= e.content %></div>
+			</div>
+
+			<% comments = Comment.where(blog_id: e.id)%>
+			<div id="commentWrapper">
+			<% if comments.length != 0 %>
+			<div style="font-weight: bold">Comments: </div>
+				<% comments.each do |c|%>
+				<% user = User.where(id: c.user_id).first %>
+				<div> <span style="font-weight: bold"><%= user.username %>:</span> <%= c.content %> </div>
+
+				<% end %>
+
+			<%end%>
+			<% if session[:user_id] != nil %>
+				<form style="display: grid; grid-template-rows: 1fr 1fr;" method="post" action="/addComment">
+				<input type="text" name="comment" placeholder="You can enter comment here" style="margin:0 auto; grid-row: 1/2; width: 80%;">
+				<input type="hidden" name="blogid" value="<%= e.id %>">
+				<input type="hidden" name="userid" value="<%= session[:user_id]%>">
+				<input type="submit" style="margin-left:9%;grid-row: 2/3; width: 25%;" value="Send Comment">
+				</form>
+			<% end %>
+			</div>
+		</div>
+		<%end%>
+	<% end %>
+
+<% else %>
+
+
+
+
+	<h2 style="text-decoration: underline; text-align: center"> Your blogs </h2>
+
+	<% post = Blog.where(user_id: session[:user_id]) %>
+
+	<% if post.length == 0 %>
+
+	<h2 style="text-align: center;"> You have no blogs. </h2>
+
+	<% else %>
+		<% post.each do |e| %>
+			<div id="blogWrapper">
+				<div id="blogTitle"><%= e.title %></div>
+				<% blogUser = User.where(id: e.user_id).first %>
+				<div id="blogUser">By: <%= blogUser.username %></div>
+				<div id="blogContent"><%= e.content %></div>
+			</div>
+
+			<% comments = Comment.where(blog_id: e.id)%>
+			<div id="commentWrapper">
+			<% if comments.length != 0 %>
+				<div style="font-weight: bold">Comments: </div>
+					<% comments.each do |c|%>
+					<% user = User.where(id: c.user_id).first %>
+					<div> <span style="font-weight: bold"><%= user.username %>:</span> <%= c.content %> </div>
+
+					<% end %>
+			<% else %>
+
+			<% end %>
+			<form style="display: grid; grid-template-rows: 1fr 1fr;" method="post" action="/addComment">
+			<input type="text" name="comment" placeholder="You can enter comment here" style="grid-row: 1/2; width: 80%;">
+			<input type="hidden" name="blogid" value="<%= e.id %>">
+			<input type="hidden" name="userid" value="<%= session[:user_id]%>">
+			<input type="submit" style="grid-row: 2/3; width: 25%;" value="Send Comment">
+			</form>
+				</div>
+		<% end %>
+	<% end %>
+<% end %>
